@@ -8,8 +8,6 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @Getter
 public class UserLoginRequest {
-    @Pattern(regexp = ".*@.*", message = "이메일 주소에는 @이 포함되어야 합니다.")
     private String email;
-    @Pattern(regexp = ".{8,}", message = "비밀번호는 최소 8자 이상이어야 합니다.")
     private String password;
 }

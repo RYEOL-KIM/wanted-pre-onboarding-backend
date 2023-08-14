@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -35,6 +37,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("회원가입 성공")
+    @WithMockUser
     void join_success() throws Exception {
         String email = "user1@gmail.com";
         String password = "password";
@@ -49,6 +52,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("회원가입 실패 - 이메일 중복")
+    @WithMockUser
     void join_fail0() throws Exception {
         String email = "user1@gmail.com";
         String password = "password";
@@ -66,6 +70,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("회원가입 실패 - 유효성 검사 - @ 포함하지 않음")
+    @WithMockUser
     void join_fail1() throws Exception {
         String email = "user1gmail.com";
         String password = "password";
@@ -80,6 +85,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("회원가입 실패 - 유효성 검사 - 비밀번호가 8자리 이상이 아님")
+    @WithMockUser
     void join_fail2() throws Exception {
         String email = "user1@gmail.com";
         String password = "passwor";
@@ -94,6 +100,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 성공")
+    @WithMockUser
     void login_success() throws Exception {
         String email = "user1@gmail.com";
         String password = "password";
@@ -111,6 +118,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 실패 - email 없음")
+    @WithMockUser
     void login_fail0() throws Exception {
         String email = "user0@gmail.com";
         String password = "password";
@@ -128,6 +136,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 실패 - 비밀번호 틀림")
+    @WithMockUser
     void login_fail1() throws Exception {
         String email = "user0@gmail.com";
         String password = "password";
@@ -141,35 +150,5 @@ class UserControllerTest {
                         .content(objectMapper.writeValueAsBytes(new UserLoginRequest(email, password))))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
-    }
-
-
-
-    @Test
-    @DisplayName("로그인 실패 - 유효성 검사 - @ 포함하지 않음")
-    void login_fail3() throws Exception {
-        String email = "user1@gmail.com";
-        String password = "password";
-
-        mockMvc.perform(post("/api/v1/users/login")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(email, password))))
-                .andDo(print())
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("로그인 실패 - 유효성 검사 - 비밀번호가 8자리 이상이 아님")
-    void login_fail4() throws Exception {
-        String email = "user1@gmail.com";
-        String password = "password";
-
-        mockMvc.perform(post("/api/v1/users/login")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(email, password))))
-                .andDo(print())
-                .andExpect(status().isBadRequest());
     }
 }
