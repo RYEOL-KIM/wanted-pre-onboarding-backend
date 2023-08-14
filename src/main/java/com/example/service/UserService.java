@@ -1,6 +1,8 @@
 package com.example.service;
 
 import com.example.entity.User;
+import com.example.exception.AppException;
+import com.example.exception.ErrorCode;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class UserService {
         // 이메일 중복 체크
         userRepository.findByEmail(email)
                 .ifPresent(user -> {
-                    throw new RuntimeException("이미 존재하는 이메일 입니다");
+                    throw new AppException(ErrorCode.USERNAME_DUPLICATED, "이미 존재하는 이메일 입니다");
                 });
 
         // 저장
