@@ -17,6 +17,11 @@ spring:
     username: root
     password: 780700
 
+mail:
+  address:
+    admin: admin@gmail.com
+
 jwt:
-  token:
-    secret: "secretKey"
+  key: as9d67f98as7df89as7df908as7f9a0s7fdasd908f7as97df0a09d
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420
