@@ -1,13 +1,11 @@
-package com.example.dto;
+package com.example.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.constraints.Pattern;
-
 @AllArgsConstructor
 @Getter
-public class UserLoginRequest {
+public class LoginRequest {
     private String email;
     private String password;
 }
