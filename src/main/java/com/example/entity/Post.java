@@ -25,6 +25,17 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Post(User user, String email, String title, String content) {
+        this.user = user;
+        this.email = email;
+        this.title = title;
+        this.content = content;
+    }
+
+    public static Post of(User user, String email, String title, String content) {
+        return new Post(user, email, title, content);
+    }
+
     public void updateTitle(String title) {
         this.title = title;
     }

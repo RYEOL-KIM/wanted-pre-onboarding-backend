@@ -25,6 +25,12 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
 
+    public User(String email, String password, List<String> roles) {
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
     public void updateId(Long id) {
         this.id = id;
     }
@@ -39,5 +45,11 @@ public class User {
 
     public void updateRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public static User of(String email, String password) {
+        ArrayList<String> roles = new ArrayList<>();
+        roles.add("USER");
+        return new User(email, password, roles);
     }
 }
