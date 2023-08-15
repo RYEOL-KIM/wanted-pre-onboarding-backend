@@ -22,13 +22,12 @@ public class UserService {
         this.authorityUtils = authorityUtils;
     }
 
-    public String join(String email, String password) {
+    public User join(String email, String password) {
 
         // 이메일 중복 체크
-        userRepository.findByEmail(email)
-                .ifPresent(user -> {
-                    throw new AppException(ErrorCode.EMAIL_DUPLICATED, "이미 존재하는 이메일 입니다");
-                });
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new AppException(ErrorCode.EMAIL_DUPLICATED, "이미 존재하는 이메일 입니다");
+        }
 
         // 저장
         User user = User.builder()
@@ -36,8 +35,7 @@ public class UserService {
                 .password(passwordEncoder.encode(password))
                 .roles(authorityUtils.createRoles(email))
                 .build();
-        userRepository.save(user);
 
-        return "SUCCESS";
+        return userRepository.save(user);
     }
 }

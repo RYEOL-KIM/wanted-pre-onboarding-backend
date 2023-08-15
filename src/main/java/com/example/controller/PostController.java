@@ -26,7 +26,7 @@ public class PostController {
     public ResponseEntity<PostCreateResponse> createPost(Authentication authentication,
                                                          @RequestBody PostCreateRequest postCreateRequest) {
 
-        return ResponseEntity.ok().body(postService.createPost(authentication, postCreateRequest));
+        return ResponseEntity.ok().body(postService.createPost(authentication.getName(), postCreateRequest));
     }
 
     @GetMapping("/{post-id}")
@@ -46,13 +46,13 @@ public class PostController {
     public ResponseEntity<PostPatchResponse> patchPost(Authentication authentication,
                                                        @PathVariable("post-id") Long postId,
                                                        @RequestBody PostPatchRequest postPatchRequest) {
-        return ResponseEntity.ok().body(postService.patchPost(postId, authentication, postPatchRequest));
+        return ResponseEntity.ok().body(postService.patchPost(postId, authentication.getName(), postPatchRequest));
     }
 
     @DeleteMapping("/{post-id}")
     public ResponseEntity<String> deletePost(Authentication authentication,
                                              @PathVariable("post-id") Long postId) {
-        return ResponseEntity.ok().body(postService.deletePost(postId, authentication));
+        return ResponseEntity.ok().body(postService.deletePost(postId, authentication.getName()));
     }
 }
 

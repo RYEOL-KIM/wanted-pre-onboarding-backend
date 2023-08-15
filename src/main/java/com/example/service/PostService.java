@@ -25,8 +25,8 @@ public class PostService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public PostCreateResponse createPost(Authentication authentication, PostCreateRequest dto) {
-        User user = userRepository.findByEmail(authentication.getName()).get();
+    public PostCreateResponse createPost(String email, PostCreateRequest dto) {
+        User user = userRepository.findByEmail(email).get();
 
         Post post = Post.builder()
                 .title(dto.getTitle())
@@ -73,12 +73,12 @@ public class PostService {
         return new PostMultiResponse<>(posts, postPage);
     }
 
-    public PostPatchResponse patchPost(Long postId, Authentication authentication, PostPatchRequest postPatchRequest) {
+    public PostPatchResponse patchPost(Long postId, String email, PostPatchRequest postPatchRequest) {
         // 게시글 작성자 확인
 
         Post post = postRepository.findById(postId).get();
 
-        verifiedPostOwner(post.getUser().getId(), authentication);
+        verifiedPostOwner(post.getUser().getId(), email);
 
         post.updateTitle(postPatchRequest.getTitle());
         post.updateContent(postPatchRequest.getContent());
@@ -94,19 +94,19 @@ public class PostService {
                 .build();
     }
 
-    public String deletePost(Long postId, Authentication authentication) {
+    public String deletePost(Long postId, String email) {
 
         Post post = postRepository.findById(postId).get();
 
-        verifiedPostOwner(post.getUser().getId(), authentication);
+        verifiedPostOwner(post.getUser().getId(), email);
 
         postRepository.delete(post);
 
         return "게시물 삭제에 성공하였습니다";
     }
 
-    public void verifiedPostOwner(Long userId, Authentication authentication) {
-        User user = userRepository.findByEmail(authentication.getName()).get();
+    public void verifiedPostOwner(Long userId, String email) {
+        User user = userRepository.findByEmail(email).get();
 
         if(!(userId == user.getId())) {
             throw new AppException(ErrorCode.NOT_AUTHOR, "작성자가 아닙니다");
