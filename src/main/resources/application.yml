@@ -23,6 +23,10 @@ logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
 
+mail:
+  address:
+    admin: admin@gmail.com
+
 jwt:
   key: as9d67f98as7df89as7df908as7f9a0s7fdasd908f7as97df0a09d
   access-token-expiration-minutes: 30
