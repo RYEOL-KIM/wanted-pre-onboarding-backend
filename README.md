@@ -65,7 +65,7 @@ http://52.78.202.239:8080/<엔트포인트 경로>
 - 게시글 상세 조회
     - GET `/api/v1/posts/{post-Id}`
 - 게시글 수정
-    - PUT `/api/v1/posts/{post-Id}`
+    - PATCH `/api/v1/posts/{post-Id}`
 - 게시글 삭제
     - DELETE `/api/v1/posts/{post-Id}`
 
