@@ -1,27 +1,7 @@
-server:
-  servlet:
-    encoding:
-      force-response: true
 
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/board_application?serverTimezone=Asia/Seoul
-    username: root
-    password: 780700
-
-mail:
-  address:
-    admin: admin@gmail.com
-
-jwt:
-  key: as9d67f98as7df89as7df908as7f9a0s7fdasd908f7as97df0a09d
-  access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 420
+  profiles:
+    group:
+      "local": "local, common"
+      "dev": "dev, common"
+    active: dev
