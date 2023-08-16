@@ -1,13 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://43.202.48.226:3306/wanted_api?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    username: wanted_api
-    password: 1234
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+    url: ${MYSQL_DATABASE_URL}
+    username: ${MYSQL_DATABASE_USERNAME}
+    password: ${MYSQL_DATABASE_PASSWORD}
+  sql:
+    init:
+      schema-locations: classpath:schema.sql
 
   jpa:
     defer-datasource-initialization: true
