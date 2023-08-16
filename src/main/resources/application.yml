@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.22.240.1:3306/wanted?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    username: wanted
+    url: jdbc:mysql://43.202.48.226:3306/wanted_api?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: wanted_api
     password: 1234
   servlet:
     multipart:
