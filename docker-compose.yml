@@ -12,3 +12,9 @@ services:
     build: .
     ports:
       - 8080:8080
+  db:
+    image: mysql:8.0.32
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - "3306:3306"
