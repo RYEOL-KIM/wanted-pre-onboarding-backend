@@ -82,28 +82,38 @@ http://52.78.202.239:8080/<엔트포인트 경로>
 
 
 
-<br><br>
-## 🖼️ 데이터베이스 테이블 구조
+<br><br><br><br>
+
+## 🖼️데이터베이스 테이블 구조
 
 ![다이어그램](https://github.com/RYEOL-KIM/wanted-pre-onboarding-backend/assets/124750905/b29df68e-cae2-4ff7-8e94-010544578ded)
 
 
-## 🖥️ 구현한 API의 동작을 촬영한 데모 영상 링크
+
+<br><br><br><br>
+
+## 🖥️구현한 API의 동작을 촬영한 데모 영상 링크
 
 - https://youtu.be/z3vx7V6vsR4
 
-<br><br>
 
-## 💡 구현 방법 및 이유에 대한 간략한 설명
+
+<br><br><br><br>
+
+
+
+## 💡구현 방법 및 이유에 대한 간략한 설명
 
 1. 사용자 요청은 Filter(Security)를 거쳐 사용자 권한을 확인한 후 해당 Controller로 전달됩니다.
 2. 권한이 확인된 사용자의 요청 DTO는 service에서 처리되며, 데이터 예외 처리 후 Repository를 통해 저장됩니다.
 3. 저장된 데이터는 Database에서 추출되어 사용자에게 반환되며, 정상적인 경우 결과 값이 표시됩니다.
 ---
 
-<br><br>
 
-## 🧱 API 명세(request/response 포함)
+
+<br><br><br><br>
+
+## 🧱API 명세(request/response 포함)
 
 
 ### POSTMAN API 명세서 링크
